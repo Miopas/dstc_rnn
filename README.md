@@ -19,7 +19,8 @@ Tensorflow >= 1.1.0
 You can find the data from this link: http://camdial.org/~mh521/dstc/
 
 ## Usage
-### 1. Get features and labels from the raw data. The output file is 'b_features' and 'b_labels'. The path of data needs to be modified in the code.
+### 1. Get features and labels from the raw data. 
+The output file is 'b_features' and 'b_labels'. The path of data needs to be modified in the code.
 ```
 python preprocess.py
 ```
