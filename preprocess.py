@@ -27,8 +27,9 @@ import pickle
 import sys
 from pprint import pprint
 
-data_path = '/Users/baidu/guoyuting/tf_test/dstc2_train/data/'
-config_path = '/Users/baidu/guoyuting/tf_test/dstc2_train/scripts/config/'
+prefix_path = './'
+data_path = prefix_path + 'data/'
+config_path = prefix_path + 'config/'
 train_file_list = 'dstc2_train.flist'
 ontology_file = 'ontology_dstc2.json'
 
@@ -198,7 +199,7 @@ def tag_ngrams_list_by_value(ngrams, value):
     return ret_dict.keys()
 
 def get_feature(usr_inputs, dialog_acts, f_ngram_list, fs_ngram_dict, fv_ngram_dict, slot_values_dict):
-    #pdb.set_trace()
+    #ret_dict = init_feature(f_ngram_list, fs_ngram_dict, fv_ngram_dict, slot_values_dict) 
     ret_dict = {}
 
     # get ngram
@@ -263,7 +264,6 @@ def format_label(lables, slot_values_dict):
                     tmp_dict[slot][value]  = 1.0
                 else:
                     tmp_dict[slot][value]  = 0.0
-            #pdb.set_trace()
         ret_list.append(tmp_dict)
     return ret_list
     
@@ -356,7 +356,6 @@ if __name__ =="__main__":
         asr_ngram_list, dlg_acts_ngram_list = get_ngram(usr_inputs, dialog_acts)
         f_ngram_dict += asr_ngram_list + dlg_acts_ngram_list
 
-    #pdb.set_trace()
     f_ngram_dict = list(set(f_ngram_dict))
     
     # Build fv, fs ngram
@@ -385,22 +384,17 @@ if __name__ =="__main__":
         filename = filename.strip()
         label_file = data_path + filename + '/label.json'
 
-        print ("Process label file [%s]..." % label_file)
         session_id = get_session_id(label_file) 
+        print (label_file)
         label_data = load_label(label_file)
-
-        # print (session_id)
+    
         labels[session_id] = format_label(label_data, slot_values_dict);
     
-    #pprint(labels)
-    exit() 
-    #pprint(input_features)
+ 
     fw = open('b_features', 'wb')
     pickle.dump(input_features, fw)
     fw.close()
-    #print (input_features, file=fw)
     
-    #pdb.set_trace() 
     fw = open('b_labels', 'wb')
     pickle.dump(labels, fw)
     fw.close()
