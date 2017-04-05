@@ -36,3 +36,7 @@ python3 dynamic_rnn.py pricerange 12800 0.01 128 test
 ## Reference
 1. Paper link: http://svr-www.eng.cam.ac.uk/~sjy/papers/htyo14.pdf
 2. https://github.com/aymericdamien/TensorFlow-Examples/
+
+## TODO
+1. the test script
+2. add pre-training part
